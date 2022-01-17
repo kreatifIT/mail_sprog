@@ -22,6 +22,34 @@
 
             &.editing-tr {
                 background-color: #d7e7e2;
+
+                .edit-input-td {
+                    background-color: #f9f9f9;
+                    border-left: 1px solid #d0d6df;
+
+                    &:nth-child(3) {
+                        border-right: 1px solid #d0d6df;
+                    }
+
+                    input {
+                        background-color: #ffffff;
+                    }
+
+                    .nav-pills {
+                        li {
+
+                            a {
+                                background: #dfe3e9;
+                                color: #324050;
+                            }
+
+                            &.active a {
+                                background-color: #324050;
+                                color: #ffffff;
+                            }
+                        }
+                    }
+                }
             }
 
             &:not(.editing-tr) td {
@@ -29,6 +57,7 @@
                 &:nth-child(1) {
                     text-align: center;
                 }
+
                 &:nth-child(3) {
                     text-align: right;
                 }

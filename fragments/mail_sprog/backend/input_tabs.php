@@ -38,7 +38,7 @@ $readonly = rex::getUser()->hasPerm('mail_sprog[add]') ? '' : ' readonly="readon
 </tr>
 <tr class="editing-tr">
     <td></td>
-    <td colspan="3">
+    <td colspan="3" class="edit-input-td">
         <ul class="nav nav-pills nav-stacked">
             <?php foreach ($langs as $langIdx => $lang): ?>
                 <li role="presentation" <?= $langIdx == 0 ? 'class="active"' : '' ?>>
@@ -49,7 +49,7 @@ $readonly = rex::getUser()->hasPerm('mail_sprog[add]') ? '' : ' readonly="readon
             <?php endforeach; ?>
         </ul>
     </td>
-    <td colspan="2">
+    <td colspan="2" class="edit-input-td">
         <div class="tab-content">
             <?php foreach ($langs as $langIdx => $lang): ?>
                 <?php
