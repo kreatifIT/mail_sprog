@@ -1,0 +1,7 @@
+mail_wildcard = Platzhalter
+subject = Betreff
+mail_text = Mail Inhalt
+list_title = Liste der Platzhalter
+wildcard_deleted = Platzhalter gelöscht
+do_search = suchen
+wildcard_saved = Platzhalter gespeichert

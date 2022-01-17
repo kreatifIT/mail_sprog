@@ -1,0 +1,38 @@
+#rex-page-mail-sprog-list {
+    .form-inline {
+        input {
+            height: 24px;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            font-size: 12px;
+            line-height: 1;
+        }
+    }
+
+    table {
+        tr {
+            &.editing-tr-heading {
+                background-color: #c0d5ca;
+                font-weight: bold;
+
+                input {
+                    font-weight: normal;
+                }
+            }
+
+            &.editing-tr {
+                background-color: #d7e7e2;
+            }
+
+            &:not(.editing-tr) td {
+                &:nth-child(2),
+                &:nth-child(1) {
+                    text-align: center;
+                }
+                &:nth-child(3) {
+                    text-align: right;
+                }
+            }
+        }
+    }
+}
