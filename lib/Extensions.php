@@ -38,7 +38,7 @@ class Extensions
         if (rex::isBackend() && rex::getUser()) {
             $addon = rex_addon::get('mail_sprog');
 
-            if ($addon->getProperty('compile') == 1) {
+            if ($addon->getProperty('compile') == 1 || !file_exists($addon->getAssetsPath('css/backend.css'))) {
                 $cssFilePath = $addon->getPath('assets/css/backend.css');
                 $compiler    = new rex_scss_compiler();
                 $compiler->setScssFile($addon->getPath('assets/css/backend.scss'));
