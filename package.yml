@@ -7,7 +7,7 @@ requires:
     php:
         version: '>=7, <9'
     packages:
-        yform_usability: ^1.5.0
+        yform_usability: '>=1.5.0'
 
 page:
     title: Sprog Mail
