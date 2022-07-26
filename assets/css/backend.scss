@@ -12,7 +12,9 @@
     table {
         tr {
             &.editing-tr-heading {
-                background-color: #c0d5ca;
+                @media (prefers-color-scheme: light) {
+                    background-color: #c0d5ca;
+                }
                 font-weight: bold;
 
                 input {
@@ -21,14 +23,18 @@
             }
 
             &.editing-tr {
-                background-color: #d7e7e2;
+                @media (prefers-color-scheme: light) {
+                    background-color: #d7e7e2;
+                }
 
                 .edit-input-td {
-                    background-color: #f9f9f9;
-                    border-left: 1px solid #d0d6df;
+                    @media (prefers-color-scheme: light) {
+                        background-color: #f9f9f9;
+                        border-left: 1px solid #d0d6df;
 
-                    &:nth-child(3) {
-                        border-right: 1px solid #d0d6df;
+                        &:nth-child(3) {
+                            border-right: 1px solid #d0d6df;
+                        }
                     }
 
                     input {
