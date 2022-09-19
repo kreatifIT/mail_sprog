@@ -38,7 +38,9 @@
                     }
 
                     input {
-                        background-color: #ffffff;
+                        @media (prefers-color-scheme: light) {
+                            background-color: #ffffff;
+                        }
                     }
 
                     .nav-pills {
