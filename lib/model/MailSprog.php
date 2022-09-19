@@ -11,9 +11,7 @@
 
 namespace Kreatif\mail_sprog\lib\model;
 
-
 use yform\usability\Model;
-
 
 class MailSprog extends Model
 {
@@ -26,10 +24,10 @@ class MailSprog extends Model
         return $query->findOne();
     }
 
-    public static function ensureMailWildcards(\rex_package $package)
+    public static function ensureMailWildcards(\rex_package $package): void
     {
         foreach (\rex_clang::getAll() as $lang) {
-            $langId   = $lang->getId();
+            $langId = $lang->getId();
             $filepath = $package->getPath("install/lang/mail_sprog_{$lang->getCode()}.csv");
 
             if (file_exists($filepath)) {
@@ -52,30 +50,42 @@ class MailSprog extends Model
         }
     }
 
-    public static function beListStyle($params, $value = null, $class = '')
+    /**
+     * @param array $params
+     * @param mixed $value
+     * @param string $class
+     * @return string
+     */
+    public static function beListStyle(array $params, $value = null, string $class = ''): string
     {
         /** @var \rex_list $list */
         $list = $params['list'];
 
         if ('delete' == $params['field']) {
-            $value = $list->getColumnLink('delete', '<i class="rex-icon rex-icon-delete"></i> ' . \rex_i18n::msg('delete'));
+            $value = $list->getColumnLink(
+                'delete',
+                '<i class="rex-icon rex-icon-delete"></i> '.\rex_i18n::msg('delete')
+            );
             $class = ' class="rex-table-action"';
         } elseif ('info' == $params['field']) {
             $messages = [];
 
             foreach (\rex_clang::getAll() as $lang) {
                 $subject = trim($list->getValue("subject_{$lang->getId()}"));
-                $text    = trim($list->getValue("replace_{$lang->getId()}"));
+                $text = trim($list->getValue("replace_{$lang->getId()}"));
 
                 if ('' == $subject) {
-                    $messages[] = 'Betreff ' . strtoupper($lang->getCode()) . ' ist leer';
+                    $messages[] = 'Betreff '.strtoupper($lang->getCode()).' ist leer';
                 }
                 if ('' == $text) {
-                    $messages[] = 'Mailtext ' . strtoupper($lang->getCode()) . ' ist leer';
+                    $messages[] = 'Mailtext '.strtoupper($lang->getCode()).' ist leer';
                 }
             }
             if (count($messages)) {
-                $value = '<span class="label label-warning">' . implode('</span><br/><span class="label label-warning">', $messages) . '</span>';
+                $value = '<span class="label label-warning">'.implode(
+                        '</span><br/><span class="label label-warning">',
+                        $messages
+                    ).'</span>';
             } else {
                 $value = '<span class="label label-success">OK</span>';
             }
@@ -84,11 +94,11 @@ class MailSprog extends Model
         } elseif ('add' == $params['field']) {
             $value = $list->getColumnLink('edit', '<i class="rex-icon rex-icon-refresh"></i>');
         } elseif ('edit' == $params['field']) {
-            $value = $list->getColumnLink('edit', '<i class="rex-icon rex-icon-edit"></i> ' . \rex_i18n::msg('edit'));
+            $value = $list->getColumnLink('edit', '<i class="rex-icon rex-icon-edit"></i> '.\rex_i18n::msg('edit'));
             $class = ' class="rex-table-action"';
         }
 
         $value = $value ?? $params['value'];
-        return '<td' . $class . '>' . $value . '</td>';
+        return '<td'.$class.'>'.$value.'</td>';
     }
 }

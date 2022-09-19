@@ -11,7 +11,7 @@
  * file that was distributed with this source code.
  */
 
-use kreatif\mail_sprog\lib\model\MailSprog;
+use Kreatif\mail_sprog\lib\model\MailSprog;
 use yform\usability\Usability;
 
 

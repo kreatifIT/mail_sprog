@@ -30,7 +30,7 @@ use rex_view;
 class Extensions
 {
 
-    public static function init()
+    public static function init(): void
     {
         // register model class
         \rex_yform_manager_dataset::setModelClass(MailSprog::getDbTable(), MailSprog::class);

@@ -11,5 +11,7 @@
  * file that was distributed with this source code.
  */
 
-echo rex_view::title($this->getProperty('page')['title']);
+$addon = \rex_addon::get('mail_sprog');
+
+echo rex_view::title($addon->getProperty('page')['title']);
 rex_be_controller::includeCurrentPageSubPath();

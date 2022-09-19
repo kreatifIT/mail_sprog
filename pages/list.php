@@ -9,9 +9,7 @@
  * file that was distributed with this source code.
  */
 
-
-use kreatif\mail_sprog\lib\model\MailSprog;
-
+use Kreatif\mail_sprog\lib\model\MailSprog;
 
 $messages   = [];
 $user       = rex::getUser();
@@ -19,7 +17,7 @@ $langs      = array_values(rex_clang::getAll());
 $action     = rex_request('func', 'string');
 $searchTerm = trim(rex_request('search-term', 'string'));
 $csrfToken  = rex_csrf_token::factory('mail-sprog-list');
-
+$addon = \rex_addon::get('mail_sprog');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 if ('delete' == $action) {
@@ -27,10 +25,10 @@ if ('delete' == $action) {
         $item = MailSprog::get(rex_get('id', 'int'));
 
         if ($item && $item->delete()) {
-            $messages[] = rex_view::success($this->i18n('wildcard_deleted'));
+            $messages[] = rex_view::success($addon->i18n('wildcard_deleted'));
         }
     } else {
-        $messages[] = rex_view::error($this->i18n('csrf_token_invalid'));
+        $messages[] = rex_view::error($addon->i18n('csrf_token_invalid'));
     }
 } elseif ('save_wildcard' == $action) {
     $wildcard = trim(rex_post('wildcard', 'string'));
@@ -45,7 +43,7 @@ if ('delete' == $action) {
         $item->setValue($_subject, trim(strip_tags(rex_post($_subject, 'string'))));
     }
     if ($item->save()) {
-        $messages[] = rex_view::success($this->i18n('wildcard_saved'));
+        $messages[] = rex_view::success($addon->i18n('wildcard_saved'));
     } else {
         $messages[] = rex_view::error(implode('<br/>', $item->getMessages()));
     }
@@ -95,16 +93,16 @@ if ($user->hasPerm('mail_sprog[add]')) {
     $list->setColumnLabel('add', '');
 }
 
-$list->setColumnLabel('id', $this->i18n('id'));
+$list->setColumnLabel('id', $addon->i18n('id'));
 $list->setColumnLayout('id', ['<th class="rex-table-id">###VALUE###</th>', '###VALUE###']);
 $list->setColumnFormat('id', 'custom', [MailSprog::class, 'beListStyle']);
 
 $list->addColumn('info', '', 2, ['<th class="rex-table-icon">###VALUE###</th>', '###VALUE###']);
-$list->setColumnLabel('info', $this->i18n('info'));
+$list->setColumnLabel('info', $addon->i18n('info'));
 $list->setColumnLayout('info', ['<th class="rex-table-action">###VALUE###</th>', '###VALUE###']);
 $list->setColumnFormat('info', 'custom', [MailSprog::class, 'beListStyle']);
 
-$list->setColumnLabel('wildcard', $this->i18n('mail_wildcard'));
+$list->setColumnLabel('wildcard', $addon->i18n('mail_wildcard'));
 $list->setColumnLayout('wildcard', ['<th>###VALUE###</th>', '###VALUE###']);
 $list->setColumnFormat('wildcard', 'custom', [MailSprog::class, 'beListStyle']);
 
@@ -123,19 +121,19 @@ foreach ($langs as $langIdx => $lang) {
     }
 }
 
-$list->addColumn('edit', '<i class="rex-icon rex-icon-edit"></i> ' . $this->i18n('edit'));
-$list->setColumnLabel('edit', $this->i18n('function'));
+$list->addColumn('edit', '<i class="rex-icon rex-icon-edit"></i> ' . $addon->i18n('edit'));
+$list->setColumnLabel('edit', $addon->i18n('function'));
 $list->setColumnLayout('edit', ['<th class="rex-table-action" colspan="2">###VALUE###</th>', '###VALUE###']);
 $list->setColumnParams('edit', ['func' => 'edit', 'id' => '###id###', $pager->getCursorName() => $pager->getCursor()]);
 $list->addLinkAttribute('edit', 'data-pjax', '[data-list-container]');
 $list->setColumnFormat('edit', 'custom', [MailSprog::class, 'beListStyle']);
 
 if ($user->hasPerm('mail_sprog[add]')) {
-    $list->addColumn('delete', '<i class="rex-icon rex-icon-delete"></i> ' . $this->i18n('delete'));
-    $list->setColumnLabel('delete', $this->i18n('function'));
+    $list->addColumn('delete', '<i class="rex-icon rex-icon-delete"></i> ' . $addon->i18n('delete'));
+    $list->setColumnLabel('delete', $addon->i18n('function'));
     $list->setColumnLayout('delete', ['', '###VALUE###']);
     $list->setColumnParams('delete', ['func' => 'delete', 'id' => '###id###'] + $csrfToken->getUrlParams());
-    $list->addLinkAttribute('delete', 'data-confirm', $this->i18n('delete') . '?');
+    $list->addLinkAttribute('delete', 'data-confirm', $addon->i18n('delete') . '?');
     $list->setColumnFormat('delete', 'custom', [MailSprog::class, 'beListStyle']);
 } else {
     $list->addColumn('delete', '');
@@ -152,7 +150,7 @@ $search = $fragment->parse('mail_sprog/backend/list_search.php');
 
 
 $fragment = new rex_fragment();
-$fragment->setVar('title', $this->i18n('list_title'));
+$fragment->setVar('title', $addon->i18n('list_title'));
 $fragment->setVar('content', $content, false);
 $fragment->setVar('options', $search, false);
 
