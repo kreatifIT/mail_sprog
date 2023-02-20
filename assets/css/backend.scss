@@ -12,9 +12,7 @@
     table {
         tr {
             &.editing-tr-heading {
-                @media (prefers-color-scheme: light) {
-                    background-color: #c0d5ca;
-                }
+                background-color: #c0d5ca;
                 font-weight: bold;
 
                 input {
@@ -23,24 +21,18 @@
             }
 
             &.editing-tr {
-                @media (prefers-color-scheme: light) {
-                    background-color: #d7e7e2;
-                }
+                background-color: #d7e7e2;
 
                 .edit-input-td {
-                    @media (prefers-color-scheme: light) {
-                        background-color: #f9f9f9;
-                        border-left: 1px solid #d0d6df;
+                    background-color: #f9f9f9;
+                    border-left: 1px solid #d0d6df;
 
-                        &:nth-child(3) {
-                            border-right: 1px solid #d0d6df;
-                        }
+                    &:nth-child(3) {
+                        border-right: 1px solid #d0d6df;
                     }
 
                     input {
-                        @media (prefers-color-scheme: light) {
-                            background-color: #ffffff;
-                        }
+                        background-color: #ffffff;
                     }
 
                     .nav-pills {
@@ -71,5 +63,46 @@
                 }
             }
         }
+    }
+}
+
+/*
+Dark Mode Modifications
+ */
+
+@mixin _dark-table-heading{
+    &#rex-page-mail-sprog-list table {
+        tr {
+            &.editing-tr-heading {
+                background-color: inherit;
+            }
+
+            &.editing-tr {
+                background-color: inherit;
+
+                .edit-input-td {
+                    background-color: inherit;
+                    border-left: none;
+
+                    &:nth-child(3) {
+                        border-right: none;
+                    }
+                }
+
+                input {
+                    background-color: inherit;
+                }
+            }
+        }
+    }
+}
+
+body.rex-theme-dark {
+    @include _dark-table-heading;
+}
+
+@media (prefers-color-scheme: dark) {
+    body:not(.rex-theme-light) {
+        @include _dark-table-heading;
     }
 }

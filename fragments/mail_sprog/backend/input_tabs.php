@@ -65,11 +65,10 @@ $readonly = rex::getUser()->hasPerm('mail_sprog[add]') ? '' : ' readonly="readon
 
                     <div class="form-group">
                         <label class="control-label"><?= rex_i18n::msg('mail_text') ?></label>
+                        <!-- backwards compatibility (tinymce4 -->
                         <textarea class="form-control tiny5-editor" name="replace_<?= $lang->getId() ?>"
                             data-profile="mail-sprog"
-                            <!-- backwards compatibility (tinymce4 -->
-                            data-tiny-mail-sprog
-                        ><?= $_value ?></textarea>
+                            data-tiny-mail-sprog><?= $_value ?></textarea>
                     </div>
 
                 </div>
